@@ -28,6 +28,7 @@ LABEL name="pantheon-ci-testing" \
 RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
+    rsync \
     curl \
     gnupg \
     --no-install-recommends \
