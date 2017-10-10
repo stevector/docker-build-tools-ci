@@ -39,7 +39,7 @@ RUN apt-get update && apt-get install -y \
     nodejs \
     --no-install-recommends \
   && npm --global install yarn \
-  && npm install backstopjs
+  && npm install backstopjs \
 
 # Keep curl so that requests can be made back to GitHub
 # && apt-get purge --auto-remove -y curl gnupg \
