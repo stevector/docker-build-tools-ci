@@ -1,8 +1,31 @@
-# Run Lighthouse w/ Chrome Headless in a container # # Lighthouse is a tool that allows auditing, performance metrics, and best # practices for Progressive Web Apps. # # What's New # # 1. Allows cache busting so you always get the latest lighthouse. # 1. Pulls from Chrome M59+ for headless support. # 2. You can now use the ever-awesome Jessie Frazelle seccomp profile for Chrome. #     wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json -O ~/chrome.json # # # To run (without seccomp): # docker run -it ~/your-local-dir:/opt/reports --net host justinribeiro/lighthouse # # To run (with seccomp): # docker run -it ~/your-local-dir:/opt/reports --security-opt seccomp=$HOME/chrome.json --net host justinribeiro/lighthouse # FROM debian:sid LABEL name="lighthouse" \
-      maintainer="Justin Ribeiro <justin@justinribeiro.com>" \
+# Run Lighthouse w/ Chrome Headless in a container
+#
+# Lighthouse is a tool that allows auditing, performance metrics, and best 
+# practices for Progressive Web Apps. 
+#
+# What's New 
+# 
+# 1. Allows cache busting so you always get the latest lighthouse.
+# 1. Pulls from Chrome M59+ for headless support.
+# 2. You can now use the ever-awesome Jessie Frazelle seccomp profile for Chrome.
+#     wget https://raw.githubusercontent.com/jfrazelle/dotfiles/master/etc/docker/seccomp/chrome.json -O ~/chrome.json
+#
+#
+# To run (without seccomp):
+# docker run -it ~/your-local-dir:/opt/reports --net host justinribeiro/lighthouse
+# 
+# To run (with seccomp):
+# docker run -it ~/your-local-dir:/opt/reports --security-opt seccomp=$HOME/chrome.json --net host justinribeiro/lighthouse 
+#
+
+FROM debian:sid
+LABEL name="pantheon-ci-testing" \
+      maintainer="Steve Persch <stevepersch@gmail.com>" \
       version="2.1" \
       description="Lighthouse analyzes web apps and web pages, collecting modern performance metrics and insights on developer best practices."
-# Install deps + add Chrome Stable + purge all the things RUN apt-get update && apt-get install -y \
+
+# Install deps + add Chrome Stable + purge all the things
+RUN apt-get update && apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -17,12 +40,23 @@
     --no-install-recommends \
   && npm --global install yarn \
 
-# Keep curl for reporting to github
-#  && apt-get purge --auto-remove -y curl gnupg \
+# Keep curl so that requests can be made back to GitHub
+# && apt-get purge --auto-remove -y curl gnupg \
   && rm -rf /var/lib/apt/lists/*
-ARG CACHEBUST=1 RUN yarn global add lighthouse
-# Add Chrome as a user RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
+
+ARG CACHEBUST=1
+RUN yarn global add lighthouse
+
+# Add Chrome as a user
+RUN groupadd -r chrome && useradd -r -g chrome -G audio,video chrome \
     && mkdir -p /home/chrome/reports && chown -R chrome:chrome /home/chrome
-# some place we can mount and view lighthouse reports VOLUME /home/chrome/reports
+
+# some place we can mount and view lighthouse reports
+VOLUME /home/chrome/reports
 WORKDIR /home/chrome/reports
-# Run Chrome non-privileged USER chrome # Drop to cli CMD ["/bin/bash"]
+
+# Run Chrome non-privileged
+USER chrome
+
+# Drop to cli
+CMD ["/bin/bash"]
