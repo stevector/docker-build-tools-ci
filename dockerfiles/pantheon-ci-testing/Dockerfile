@@ -43,8 +43,7 @@ RUN apt-get update && apt-get install -y \
   && npm --global install yarn \
   && npm --global install backstopjs \
 
-# Keep curl so that requests can be made back to GitHub
-# && apt-get purge --auto-remove -y curl gnupg \
+  && apt-get purge --auto-remove -y gnupg \
   && rm -rf /var/lib/apt/lists/*
 
 ARG CACHEBUST=1
