@@ -26,9 +26,9 @@ RUN apt-get update
 # Add node tooling.
 # A lot of Drupal/WordPress sites have build processes
 # that require these.
-RUN sudo apt-get --purge remove node
-RUN sudo apt-get --purge remove nodejs
-RUN sudo apt-get install -y nodejs
+RUN apt-get --purge remove node
+RUN apt-get --purge remove nodejs
+RUN apt-get install -y nodejs
 RUN apt-get install -y build-essential
 RUN node -v
 #RUN apt-get install -y npm
