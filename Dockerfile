@@ -27,6 +27,7 @@ RUN composer -n create-project -d /usr/local/share/terminus-plugins pantheon-sys
 # A lot of Drupal/WordPress sites have build processes
 # that require these.
 RUN apt-get install -y nodejs
+RUN apt-get install -y npm
 #RUN npm install npm@latest -g
 RUN npm --global install yarn
 RUN npm install --global gulp-cli
