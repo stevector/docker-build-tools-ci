@@ -7,6 +7,19 @@ WORKDIR /build-tools-ci
 # Copy the current directory contents into the container at /build-tools-ci
 ADD . /build-tools-ci
 
+# Add node tooling.
+# A lot of Drupal/WordPress sites have build processes
+# that require these.
+RUN sudo apt-get --purge remove node
+RUN sudo apt-get --purge remove nodejs
+RUN sudo apt-get install -y nodejs
+RUN apt-get install -y build-essential
+RUN node -v
+#RUN apt-get install -y npm
+#RUN npm install npm@latest -g
+RUN npm --global install yarn
+RUN npm install --global gulp-cli
+
 # Collect the components we need for this image
 RUN apt-get update
 RUN composer -n global require -n "hirak/prestissimo:^0.3"
@@ -23,14 +36,3 @@ RUN composer -n create-project -d /usr/local/share/terminus-plugins pantheon-sys
 RUN composer -n create-project -d /usr/local/share/terminus-plugins pantheon-systems/terminus-drupal-console-plugin:^1
 RUN composer -n create-project -d /usr/local/share/terminus-plugins pantheon-systems/terminus-mass-update:^1
 
-# Add node tooling.
-# A lot of Drupal/WordPress sites have build processes
-# that require these.
-RUN sudo apt-get --purge remove node
-RUN sudo apt-get --purge remove nodejs
-RUN sudo apt-get install -y nodejs
-RUN node -v
-#RUN apt-get install -y npm
-#RUN npm install npm@latest -g
-RUN npm --global install yarn
-RUN npm install --global gulp-cli
