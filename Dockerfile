@@ -22,3 +22,11 @@ RUN composer -n create-project -d /usr/local/share/terminus-plugins pantheon-sys
 RUN composer -n create-project -d /usr/local/share/terminus-plugins pantheon-systems/terminus-composer-plugin:^1
 RUN composer -n create-project -d /usr/local/share/terminus-plugins pantheon-systems/terminus-drupal-console-plugin:^1
 RUN composer -n create-project -d /usr/local/share/terminus-plugins pantheon-systems/terminus-mass-update:^1
+
+# Add node tooling.
+# A lot of Drupal/WordPress sites have build processes
+# that require these.
+apt-get install -y nodejs
+npm install npm@latest -g
+npm --global install yarn
+npm install --global gulp-cli
