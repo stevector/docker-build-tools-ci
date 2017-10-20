@@ -1,11 +1,11 @@
 
-#FROM drupaldocker/php:7.1-cli
+FROM drupaldocker/php:7.1-cli
 
 # Set the working directory to /build-tools-ci
-#WORKDIR /build-tools-ci
+WORKDIR /build-tools-ci
 
 # Copy the current directory contents into the container at /build-tools-ci
-#ADD . /build-tools-ci
+ADD . /build-tools-ci
 
 
 
@@ -17,7 +17,7 @@
 
 
 
-FROM debian:sid
+#FROM debian:sid
 
 
 # Collect the components we need for this image
