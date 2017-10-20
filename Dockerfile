@@ -30,6 +30,7 @@ RUN apt-get --purge remove node
 RUN apt-get --purge remove nodejs
 RUN apt-get install -y nodejs
 RUN apt-get install -y build-essential
+RUN nodejs -v
 RUN node -v
 #RUN apt-get install -y npm
 #RUN npm install npm@latest -g
