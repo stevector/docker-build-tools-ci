@@ -28,7 +28,7 @@ RUN composer -n create-project -d /usr/local/share/terminus-plugins pantheon-sys
 # that require these.
 RUN sudo apt-get --purge remove node
 RUN sudo apt-get --purge remove nodejs
-RUN sudo apt-get install nodejs
+RUN sudo apt-get install -y nodejs
 RUN node -v
 #RUN apt-get install -y npm
 #RUN npm install npm@latest -g
