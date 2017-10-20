@@ -27,13 +27,11 @@ RUN apt-get update
 # Add node tooling.
 # A lot of Drupal/WordPress sites have build processes
 # that require these.
-RUN curl -sSL https://deb.nodesource.com/setup_6.x | bash -
+RUN curl -sSL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get --purge remove node
 RUN apt-get --purge remove nodejs
 RUN apt-get install -y nodejs
 RUN apt-get install -y build-essential
-RUN ln -s /usr/bin/nodejs /usr/bin/node
-RUN nodejs -v
 RUN node -v
 #RUN apt-get install -y npm
 #RUN npm install npm@latest -g
