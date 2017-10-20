@@ -7,6 +7,9 @@ WORKDIR /build-tools-ci
 # Copy the current directory contents into the container at /build-tools-ci
 ADD . /build-tools-ci
 
+# Collect the components we need for this image
+RUN apt-get update
+
 # Add node tooling.
 # A lot of Drupal/WordPress sites have build processes
 # that require these.
@@ -20,8 +23,9 @@ RUN node -v
 RUN npm --global install yarn
 RUN npm install --global gulp-cli
 
-# Collect the components we need for this image
-RUN apt-get update
+
+
+
 RUN composer -n global require -n "hirak/prestissimo:^0.3"
 RUN /usr/bin/env COMPOSER_BIN_DIR=/usr/local/bin composer -n --working-dir=/usr/local/share require pantheon-systems/terminus "^1"
 RUN /usr/bin/env COMPOSER_BIN_DIR=/usr/local/bin composer -n --working-dir=/usr/local/share require drush/drush "^8"
