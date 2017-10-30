@@ -1,10 +1,10 @@
 # Run Lighthouse w/ Chrome Headless in a container
 #
-# Lighthouse is a tool that allows auditing, performance metrics, and best 
-# practices for Progressive Web Apps. 
+# Lighthouse is a tool that allows auditing, performance metrics, and best
+# practices for Progressive Web Apps.
 #
-# What's New 
-# 
+# What's New
+#
 # 1. Allows cache busting so you always get the latest lighthouse.
 # 1. Pulls from Chrome M59+ for headless support.
 # 2. You can now use the ever-awesome Jessie Frazelle seccomp profile for Chrome.
@@ -13,9 +13,9 @@
 #
 # To run (without seccomp):
 # docker run -it ~/your-local-dir:/opt/reports --net host justinribeiro/lighthouse
-# 
+#
 # To run (with seccomp):
-# docker run -it ~/your-local-dir:/opt/reports --security-opt seccomp=$HOME/chrome.json --net host justinribeiro/lighthouse 
+# docker run -it ~/your-local-dir:/opt/reports --security-opt seccomp=$HOME/chrome.json --net host justinribeiro/lighthouse
 #
 
 FROM debian:sid
@@ -23,6 +23,10 @@ LABEL name="pantheon-ci-testing" \
       maintainer="Steve Persch <stevepersch@gmail.com>" \
       version="2.1" \
       description="Lighthouse analyzes web apps and web pages, collecting modern performance metrics and insights on developer best practices."
+
+ADD . /build-tools-ci
+
+
 
 # Install deps + add Chrome Stable + purge all the things
 RUN apt-get update && apt-get install -y \
