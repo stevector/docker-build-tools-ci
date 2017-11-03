@@ -7,19 +7,6 @@ WORKDIR /build-tools-ci
 # Copy the current directory contents into the container at /build-tools-ci
 ADD . /build-tools-ci
 
-
-
-
-
-
-
-
-
-
-
-#FROM debian:sid
-
-
 # Collect the components we need for this image
 RUN apt-get update
 
