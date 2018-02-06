@@ -64,6 +64,10 @@ RUN \
 RUN \
 	echo -e "\nInstalling lighthouse v${LIGHTHOUSE_VERSION}..." && \
 	npm install -g lighthouse@${LIGHTHOUSE_VERSION}
+	
+RUN \
+        echo -e "\nInstalling yarn..." && \
+	npm --global install yarn
 
 # Add scripts
 ADD . /build-tools-ci
