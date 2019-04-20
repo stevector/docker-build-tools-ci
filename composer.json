@@ -1,3 +1,8 @@
 {
-  "name": "pantheon-systems/docker-build-tools-ci"
+  "name": "pantheon-systems/docker-build-tools-ci",
+  "require": {
+    "drupal/core": "8.6.15",
+    "webflo/drupal-core-strict": "8.6.15",
+    "drush/drush": "8.1.17"
+  }
 }
